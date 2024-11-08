@@ -12,7 +12,7 @@ Các dịch vụ đám mây được hỗ trợ:
 
 ## <a name="installation"></a>Cài đặt
 
-Tải xuống file `KoboRoot.tgz` mới nhất từ trang Phát hành (hoặc [liên kết trực tiếp này](https://github.com/fsantini/KoboCloud/releases/download/latest/KoboRoot.tgz)).
+Tải xuống file `KoboRoot.tgz` mới nhất từ trang Phát hành (hoặc [liên kết trực tiếp này](https://github.com/haiconmeo/KoboCloud/releases/download/untagged-59fd22a4719d02d1e0e4/KoboRoot.tgz)).
 
 Chép nó vào thiết bị Kobo:
 
