@@ -1,7 +1,8 @@
 # KoboCloud
-A set of scripts to synchronize a kobo reader with popular cloud services.
+Bộ script để đồng bộ hóa thiết bị đọc Kobo với các dịch vụ đám mây phổ biến. Có sẵn các font tiếng việt ở file cài đặt : 
+nguồn từ repo https://github.com/lelinhtinh/kobo-tieng-viet
 
-The following cloud services are supported:
+Các dịch vụ đám mây được hỗ trợ:
 
 - Dropbox
 - Google Drive
@@ -9,154 +10,138 @@ The following cloud services are supported:
 - pCloud
 - Box
 
-## <a name="installation"></a>Installation
+## <a name="installation"></a>Cài đặt
 
-Download the latest `KoboRoot.tgz` from the Release page (or using [this direct link](https://github.com/fsantini/KoboCloud/releases/download/latest/KoboRoot.tgz)).
+Tải xuống file `KoboRoot.tgz` mới nhất từ trang Phát hành (hoặc [liên kết trực tiếp này](https://github.com/fsantini/KoboCloud/releases/download/latest/KoboRoot.tgz)).
 
-Copy it into the Kobo device:
+Chép nó vào thiết bị Kobo:
 
-- Connect the Kobo device and mount it (you should be able to access to the kobo filesystem)
-- Copy the .tgz archive in the .kobo directory(1) of your device
-- Unplug and restart your Kobo device
+- Kết nối thiết bị Kobo và gắn kết nó (bạn sẽ có thể truy cập vào hệ thống file của Kobo)
+- Sao chép file .tgz vào thư mục .kobo(1) trên thiết bị của bạn
+- Ngắt kết nối và khởi động lại thiết bị Kobo
 
-(1) It is a hidden directory, so you have to enable the visualization of hidden files
+(1) Đây là thư mục ẩn, bạn cần bật chế độ hiển thị file ẩn
 
-**Note for Mac/Safari users:** Safari automatically unpacks `KoboRoot.tgz` into `KoboRoot.tar` after downloading. Please make sure that you transfer the `.tgz` file to your Kobo, and **not** the `.tar`. Either use a different browser to download the package, or re-pack it (using `gzip`) before transferring.
+**Lưu ý cho người dùng Mac/Safari:** Safari tự động giải nén `KoboRoot.tgz` thành `KoboRoot.tar` sau khi tải xuống. Hãy chắc chắn rằng bạn chuyển file `.tgz` vào Kobo, **không phải** file `.tar`. Sử dụng trình duyệt khác để tải gói về hoặc đóng gói lại (sử dụng `gzip`) trước khi chuyển.
 
-## Configuration
+## Cấu hình
 
-After the installation process:
+Sau khi cài đặt:
 
-- Plug your Kobo back into the computer
-- Open the configuration file located at `.add/kobocloud/kobocloudrc`
-- Add the links to the cloud services (one per line)
+- Cắm Kobo lại vào máy tính
+- Mở file cấu hình nằm trong `.add/kobocloud/kobocloudrc`
+- Thêm các liên kết đến dịch vụ đám mây (mỗi dòng một liên kết)
 
-Configuration example:
+Ví dụ cấu hình:
 
 ```
-# Lines starting with '#' are ignored
-# Google drive:
+# Các dòng bắt đầu bằng '#' sẽ bị bỏ qua
+# Google Drive:
 https://drive.google.com/drive/folders/<ID>?usp=sharing
 # Dropbox:
 https://www.dropbox.com/sh/pgSHORTENED
 REMOVE_DELETED
 ```
 
-Some important advice:
-- make sure that there are **no spaces** before or after the link on the line
-- **no subdirectories** are supported at the moment, your books must be all in the same directories that you are sharing
-- **restart your Kobo** after any kobocloudrc changes to to make them effective
+Một số lưu ý quan trọng:
+- Đảm bảo không có **khoảng trắng** trước hoặc sau liên kết trên dòng
+- **Không hỗ trợ thư mục con** tại thời điểm này, các sách của bạn phải nằm trong cùng một thư mục mà bạn chia sẻ
+- **Khởi động lại Kobo** sau khi thay đổi bất kỳ thiết lập nào trong kobocloudrc để áp dụng
 
-### Dropbox public folder
+### Thư mục công khai Dropbox
 
-Due to a change in Dropbox website, the public folder method does not work anymore.
+Do thay đổi trên trang web Dropbox, phương pháp dùng thư mục công khai không còn hoạt động.
 
-### Dropbox private folder
+### Thư mục riêng tư Dropbox
 
-This method will create a folder `/Applications/Kobo Cloud Sync` in your Dropbox and sync with it.
+Phương pháp này sẽ tạo một thư mục `/Applications/Kobo Cloud Sync` trong Dropbox của bạn và đồng bộ với nó.
 
-- Open this [link](https://www.dropbox.com/oauth2/authorize?response_type=code&token_access_type=offline&client_id=5oyw72cfwcp352f&code_challenge_method=plain&code_challenge=0000000000000000000000000000000000000000000&redirect_uri=https://louisabraham.github.io/KoboCloud/)
-- Paste the command in a terminal
-- Copy the line starting with `DropboxApp:` from your terminal
-- Add it to your `kobocloudrc` file
+- Mở [liên kết này](https://www.dropbox.com/oauth2/authorize?response_type=code&token_access_type=offline&client_id=5oyw72cfwcp352f&code_challenge_method=plain&code_challenge=0000000000000000000000000000000000000000000&redirect_uri=https://louisabraham.github.io/KoboCloud/)
+- Dán lệnh vào terminal
+- Sao chép dòng bắt đầu với `DropboxApp:` từ terminal của bạn
+- Thêm nó vào file `kobocloudrc`
 
 ### Google Drive
 
-- Use the "link sharing" option on a Google Drive folder
-- Select the option "anyone with the link can view."
-- Copy-paste the link in the kobocloudrc file
+- Sử dụng tùy chọn "chia sẻ liên kết" trên thư mục Google Drive
+- Chọn tùy chọn "ai có liên kết đều có thể xem."
+- Sao chép và dán liên kết vào file kobocloudrc
 
-Subdirectories are supported for Google Drive.
-**Important**: Folders with many files might not work.
+Hỗ trợ thư mục con cho Google Drive.
+**Lưu ý**: Các thư mục có nhiều file có thể không hoạt động.
 
-### Nextcloud (Owncloud)
+### NextCloud (OwnCloud)
 
-To add a NextCloud (ownCloud) link:
+Để thêm một liên kết NextCloud (OwnCloud):
 
-- Open your nextcloud website in a browser
-- Select the folder that you want to share
-- Click on "Share" and select "Share with link"
-- Copy the link into the kobocloudrc file
+- Mở trang NextCloud trong trình duyệt
+- Chọn thư mục bạn muốn chia sẻ
+- Nhấp vào "Chia sẻ" và chọn "Chia sẻ bằng liên kết"
+- Sao chép liên kết vào file kobocloudrc
 
-Please note that you need a recent NextCloud (OwnCloud) version.
-Subdirectories are supported for NextCloud (OwnCloud).
+Lưu ý rằng bạn cần phiên bản NextCloud (OwnCloud) mới. 
+Hỗ trợ thư mục con cho NextCloud (OwnCloud).
 
-**Important**: Webdav for public folders should be enabled, see: https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#accessing-public-shares-over-webdav for more info. You should also make sure that 'dav.propfind.depth_infinity' is set to 'true'. See: https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_sample_php_parameters.html#enable-propfind-depth-infinity-requests.
+**Lưu ý**: Webdav cho thư mục công khai cần được bật, xem thêm tại: https://docs.nextcloud.com/server/20/user_manual/en/files/access_webdav.html#accessing-public-shares-over-webdav. Bạn cũng cần đảm bảo rằng 'dav.propfind.depth_infinity' được đặt thành 'true'. Xem thêm tại: https://doc.owncloud.com/server/next/admin_manual/configuration/server/config_sample_php_parameters.html#enable-propfind-depth-infinity-requests.
 
 ### pCloud
 
-- Add the public link to the containing folder to the kobocloudrc file.
+- Thêm liên kết công khai đến thư mục chứa vào file kobocloudrc.
 
-~~Files added into a subfolder of the *public* folder of pCloud are also supported.~~
-Due to a different download method for pCloud (new share links have a different format) subfolders are only supported on the older share folders. Not on the newer ones.
+~~Các file được thêm vào thư mục con trong thư mục *công khai* của pCloud cũng được hỗ trợ.~~
+Do phương pháp tải xuống khác nhau cho pCloud (các liên kết chia sẻ mới có định dạng khác), chỉ hỗ trợ thư mục con trên các thư mục chia sẻ cũ. Không áp dụng cho các thư mục chia sẻ mới.
 
 ### Box
 
-- On a Box folder, click "Create link" in the sidebar and enable "Share Link"
-- Select the options "People with the link" and "can view and download"
-- Copy-paste the link in the kobocloudrc file
+- Trên thư mục Box, nhấp "Tạo liên kết" trong thanh bên và bật "Chia sẻ liên kết"
+- Chọn các tùy chọn "Người có liên kết" và "có thể xem và tải xuống"
+- Sao chép và dán liên kết vào file kobocloudrc
 
-Please note that, even though the script supports folders where the file list has multiple pages, having a list with many pages might not work.
+Lưu ý rằng, mặc dù script hỗ trợ thư mục có danh sách file có nhiều trang, danh sách nhiều trang có thể không hoạt động.
 
-### Matching remote server
-To delete files from library when they are no longer in the remote server:
+### Đồng bộ với máy chủ từ xa
+Để xóa file khỏi thư viện khi chúng không còn trên máy chủ từ xa:
 
-- Edit the kobocloudrc file so it contains the phrase `REMOVE_DELETED` in a single line (all capital, no spaces before or after).
-- Restart your Kobo.
+- Chỉnh sửa file kobocloudrc để chứa cụm từ `REMOVE_DELETED` trên một dòng riêng biệt (viết hoa hoàn toàn, không có khoảng trống trước hoặc sau).
+- Khởi động lại Kobo của bạn.
 
-The next time the Kobo is connected to the internet, it will delete any files (it will not delete directories) that are not in the remote server.
+Lần tiếp theo khi Kobo kết nối Internet, nó sẽ xóa bất kỳ file nào (không bao gồm thư mục) không có trên máy chủ từ xa.
 
+## Sử dụng
 
-## Usage
+Các file mới sẽ được tải xuống khi Kobo kết nối Internet để đồng bộ. Đôi khi cần vài phút sau quá trình đồng bộ để thiết bị nhận dạng và nhập nội dung mới tải xuống.
 
-The new files will be downloaded when the kobo connects to the Internet for a sync. Sometimes few minutes is needed after the sync process for the device to recognize and import new downloaded content.
+## Gỡ cài đặt
 
-## Uninstallation
+Để gỡ cài đặt KoboCloud đúng cách:
 
-To properly uninstall KoboCloud:
+- Chỉnh sửa file kobocloudrc để chứa từ `UNINSTALL` trên một dòng riêng biệt (viết hoa hoàn toàn, không có khoảng trống trước hoặc sau).
+- Khởi động lại Kobo của bạn.
 
-- Edit the kobocloudrc file so that it contains the word `UNINSTALL` in a single line (all capital, no spaces before or after)
-- Restart your Kobo
+Lần tiếp theo khi Kobo kết nối Internet, chương trình sẽ tự xóa.
 
-The next time the Kobo is connected to the Internet, the program will delete itself.
+Lưu ý: Thư mục .add/kobocloud sẽ không bị xóa. Sau khi kết nối thiết bị với máy tính, bạn nên chuyển các file từ thư mục Library để không mất nội dung, và xóa thư mục kobocloud theo cách thủ công.
 
-Note: The directory .add/kobocloud will not be deleted: after connecting the device to a computer, you should move the files from the Library subfolder in order not to lose your content, and delete the whole kobocloud directory manually.
+## Cài đặt từ mã nguồn
 
-## Installation from source code
+Để cài đặt KoboCloud từ mã nguồn:
 
-To install KoboCloud from source code:
+- Tải xuống kho lưu trữ này
+- Biên dịch mã thành định dạng nén (hướng dẫn dưới đây)
+- Thực hiện theo hướng dẫn [cài đặt](#installation)
 
-- Download this repository
-- Compile the code into an archive format (instructions below)
-- Follow [installation](#installation) instructions
+### Biên dịch
 
-### Compiling
+- Di chuyển đến thư mục gốc của dự án
+- Mở file cấu hình nằm trong `src/usr/local/kobocloud/kobocloudrc.tmpl`
+- Thêm các liên kết đến dịch vụ đám mây (xem ví dụ cấu hình bên trên)
+- Chạy `sh ./makeKoboRoot.sh`
 
-- Move to the project directory root
-- Open the configuration file located at `src/usr/local/kobocloud/kobocloudrc.tmpl`
-- Add the links to the cloud services (see the configuration example that follow below)
-- Run `sh ./makeKoboRoot.sh`
+Lệnh cuối cùng sẽ tạo ra file `KoboRoot.tgz`.
 
-The last command will create a `KoboRoot.tgz` archive.
+Giờ bạn có thể làm theo hướng dẫn [cài đặt](#installation).
 
-Now you can follow [installation](#installation) instructions.
+## Khắc phục sự cố
 
-## Troubleshooting
+KoboCloud lưu nhật ký của mỗi phiên trong file .add/kobocloud/get.log. Nếu có sự cố, thông tin hữu ích có thể tìm thấy ở đó. Vui lòng gửi bản sao file này khi báo cáo lỗi.
 
-KoboCloud keeps a log of each session in the .add/kobocloud/get.log file. If something goes wrong, useful information can be found there. Please send a copy of this file with every bug report.
-
-## Known issues
-
-* Subfolder support is limited.
-* Some versions of Kobo make the same book appear twice in the library. This is because it scans the internal directory where the files are saved as well as the "official" folders. To solve this problem find the `Kobo eReader.conf` file inside your `.kobo/Kobo` folder and make sure the following line (which prevents the syncing of dotfiles and dotfolders) is set in the `[FeatureSettings]` section:
-```
-  ExcludeSyncFolders=\\.(?!add|adobe).*?
-```
-
-
-## Acknowledgment
-
-KoboCloud installs [NickelDBus](https://github.com/shermp/NickelDBus) if not present. Thanks to shermp for providing this!
-Thanks to the defunct SendToKobo service for the inspiration of the project and for the basis of the scripts.
-Curl for Kobo was downloaded from here: https://www.mobileread.com/forums/showthread.php?p=3734553 . Thanks to NiLuJe for providing it!
-Thanks to Christoph Burschka for the help in updating this tool to the recent versions of kobo and nextcloud.
